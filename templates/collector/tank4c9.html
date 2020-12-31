@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}工艺监控{% endblock %}
+{% block content %}
+
+<div class="container " style="height:455px;background:url(../../static/images/gongyitu.png) no-repeat center;background-size:contain;">
+
+        <div class="row">&nbsp; </div>
+        <div class="row"> &nbsp;</div>
+        <div class="row"> &nbsp;</div>
+        <div class="row">
+            <div class="col-md-7"></div>
+            <div class="col-md-2"><strong class="text-warning" id="overheadflow">100</strong><strong> mm/sΛ2</strong></div>
+
+        </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+
+            <div class="col-md-2"> <strong class="text-success" id="power" >200</strong><strong> kWh</strong></div>
+            <div class="col-md-7"></div>
+
+        </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+        <div class="row">&nbsp; </div>
+
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><strong class="text-danger" id="buttomsflow">300</strong><strong>  mm/sΛ2</strong></div>
+            <div class="col-md-2"></div>
+
+        </div>
+
+     <script>
+       //JQuery 代码入口
+        $(document).ready(function(){
+            setInterval("getData()",1000);
+        });
+
+        function getData() {
+            //模拟异步从后台获得值
+            $.ajax({
+                url: "{% url 'collector:gettank4c9data' %}", success: function (result) {
+                    data = JSON.parse(result);
+                    $("#overheadflow").html(data.OverheadFlow);
+                    $("#buttomsflow").html(data.ButtomsFlow);
+                    $("#power").html(data.Power);
+                }
+            });
+        }
+
+    </script>
+
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
